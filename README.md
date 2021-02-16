@@ -2,8 +2,7 @@
 
 ## Lab 1
 ### Variant 20 Task:
- - Create class Farm with following methods: location, animals count and vents power.
- - 3 additional fields.
+ - Create class Farm with following fields: location, animals count and vents power.
  - Constructor.
  - Destructor.
  - `__str__()` method.
