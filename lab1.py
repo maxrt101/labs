@@ -24,7 +24,11 @@ class Farm:
 
 
 def main() -> None:
-  farms: list[Farm] = [Farm("Lviv", 150, 400, 10000, 3000000, ["monkeys", "shraks"]), Farm("Kyiv", 250, 700, 20000, 4500000, ["cows", "rabbits"]), Farm("Ternopil", 100, 300, 7000, 2100000, ["pigs", "chickens"])]
+  farms: list[Farm] = [
+    Farm("Lviv",     150, 400, 10000, 3000000, ["monkeys", "shraks"]),
+    Farm("Kyiv",     250, 700, 20000, 4500000, ["cows", "rabbits"]),
+    Farm("Ternopil", 100, 300, 7000,  2100000, ["pigs", "chickens"])
+  ]
   for farm in farms:
     print(farm)
 
