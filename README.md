@@ -12,3 +12,8 @@
  - In `main()`: create 3 objects and print them into the console.
  - The code must be uploaded into the git repository as pull request; the repository must contain README and .gitignore.
 
+### To run:
+  - Clone/Download repo
+  - Go into repo folder
+  - Type `python3 lab1.py`
+
