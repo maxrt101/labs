@@ -16,7 +16,7 @@ class Farm:
     Farm.farm_count -= 1
 
   def __str__(self) -> str:
-    return f"Farm({self.location}, {self.animal_count}, {self.vents_power}. {self.area}, {self.monthly_income}, {self.animal_species})"
+    return f"Farm:\n  location: {self.location}\n  animal count: {self.animal_count}\n  vents power: {self.vents_power}\n  area: {self.area}\n  monthly income: {self.monthly_income}\n  animal species: {self.animal_species}"
 
   @classmethod
   def get_count(cls) -> int:
