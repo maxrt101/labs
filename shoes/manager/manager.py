@@ -18,22 +18,22 @@ class ShoesManager:
 
 
   def sort_by_size(self, reverse: bool = False, shoes: List[Shoes] = None) -> List[Shoes]:
-    return sorted(shoes if shoes else self.shoes, key=lambda s: s.get_size(), reverse=reverse)
+    return sorted(shoes if shoes else self.shoes, key=lambda s: s.size, reverse=reverse)
 
 
   def sort_by_type(self, reverse: bool = False, shoes: List[Shoes] = None) -> None:
-    return sorted(shoes if shoes else self.shoes, key=lambda s: s.get_type().name.lower(), reverse=reverse)
+    return sorted(shoes if shoes else self.shoes, key=lambda s: s.type.name.lower(), reverse=reverse)
 
 
   def sort_by_manufacturer(self, reverse: bool = False, shoes: List[Shoes] = None) -> None:
-    return sorted(shoes if shoes else self.shoes, key=lambda s: s.get_manufacturer().lower(), reverse=reverse)
+    return sorted(shoes if shoes else self.shoes, key=lambda s: s.manufacturer.lower(), reverse=reverse)
 
 
   def find_by_type(self, shoes_type: ShoeType) -> List[Shoes]:
-    return [shoe for shoe in self.shoes if shoe.get_type() == shoes_type]
+    return [shoe for shoe in self.shoes if shoe.type == shoes_type]
 
 
   def find_by_size(self, size: int) -> List[Shoes]:
-    return [shoe for shoe in self.shoes if shoe.get_size() == size]
+    return [shoe for shoe in self.shoes if shoe.size == size]
 
 

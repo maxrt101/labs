@@ -15,13 +15,16 @@ class Shoes:
     self._shoes_type = ShoeType(shoes_type)
     self._manufacturer = manufacturer
 
-  def get_size(self) -> int:
+  @property
+  def size(self) -> int:
     return self._size
 
-  def get_type(self) -> ShoeType:
+  @property
+  def type(self) -> ShoeType:
     return self._shoes_type
 
-  def get_manufacturer(self) -> str:
+  @property
+  def manufacturer(self) -> str:
     return self._manufacturer
 
   def __str__(self) -> str:
