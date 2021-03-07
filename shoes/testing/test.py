@@ -1,7 +1,7 @@
-from shoes_manager import ShoesManager
-from shoes import ShoeType, Sneakers, Boots, FlipFlops
+from ..manager import ShoesManager
+from .. import ShoeType, Sneakers, Boots, FlipFlops
 
-class Test:
+class ShoesTest:
   def __init__(self) -> None:
     pass
 

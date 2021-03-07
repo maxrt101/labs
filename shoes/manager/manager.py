@@ -1,7 +1,7 @@
-# shoes_manager.py by maxrt101
+# manager.py by maxrt101
 
 from typing import List
-from shoes import Shoes, ShoeType
+from .. import Shoes, ShoeType
 
 
 class ShoesManager:

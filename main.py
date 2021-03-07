@@ -2,9 +2,9 @@
 
 # lab3/20 by maxrt101
 
-from test import Test
+from shoes.testing import ShoesTest
 
 if __name__ == '__main__':
-  t = Test()
-  t.main()
+  test = ShoesTest()
+  test.main()
 

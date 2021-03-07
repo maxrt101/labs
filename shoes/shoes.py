@@ -27,20 +27,3 @@ class Shoes:
   def __str__(self) -> str:
     return f'{self._manufacturer} {self.__class__.__name__} size: {self._size} type: {self._shoes_type.name}'
 
-
-class Sneakers(Shoes):
-  def __init__(self, size: int = 0, manufacturer: str = '') -> None:
-    super().__init__(ShoeType.SPORT, size, manufacturer)
-
-
-class Boots(Shoes):
-  def __init__(self, size: int = 0, manufacturer: str = '') -> None:
-    super().__init__(ShoeType.WINTER, size, manufacturer)
-
-
-class FlipFlops(Shoes):
-  def __init__(self, size: int = 0, manufacturer: str = '') -> None:
-    super().__init__(ShoeType.SUMMER, size, manufacturer)
-
-
-
