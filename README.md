@@ -17,3 +17,8 @@
   - Go into repo folder
   - Type `./main.py` or `python3 main.py`
 
+### To run tests:
+  - Clone/Download lab2 branch
+  - Go into repo folder
+  - Type `python3 -m unittest`
+
