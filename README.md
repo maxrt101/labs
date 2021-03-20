@@ -15,17 +15,18 @@ shoes/boots.py                   4      0   100%
 shoes/flip_flops.py              4      0   100%
 shoes/manager/__init__.py        1      0   100%
 shoes/manager/manager.py        19      0   100%
-shoes/shoes.py                  21      1    95%
+shoes/shoes.py                  21      0   100%
 shoes/sneakers.py                4      0   100%
 shoes/test/__init__.py           0      0   100%
 shoes/test/test_find.py         15      0   100%
 shoes/test/test_manager.py      15      0   100%
-shoes/test/test_shoes.py        20      0   100%
+shoes/test/test_pep8.py         20      0   100%
+shoes/test/test_shoes.py        22      0   100%
 shoes/test/test_sort.py         19      0   100%
 shoes/testing/__init__.py        2      0   100%
 shoes/testing/test.py           13      8    38%
 ------------------------------------------------
-TOTAL                          142      9    94%
+TOTAL                          164      8    95%
 ```
 
 ### To run tests:

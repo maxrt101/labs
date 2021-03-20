@@ -11,6 +11,9 @@ class ShoesTest(unittest.TestCase):
         self.assertEqual(shoe.size, 44)
         self.assertEqual(shoe.manufacturer, "abibas")
 
+        str_must_contain = [str(shoe.type.name), str(shoe.size), str(shoe.manufacturer)]
+        self.assertEqual(all(map(str(shoe).__contains__, str_must_contain)), True)
+
     def test_sneakers(self):
         sneakers = Sneakers(50, "nike")
 
