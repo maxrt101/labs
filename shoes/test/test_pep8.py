@@ -1,6 +1,5 @@
 import unittest
 import pep8
-
 import os
 
 
