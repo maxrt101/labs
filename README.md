@@ -29,7 +29,7 @@ TOTAL                          142      9    94%
 ```
 
 ### To run tests:
-  - Clone/Download lab2 branch
+  - Clone/Download lab4 branch
   - Go into repo folder
   - Type `python3 -m unittest`
 
@@ -47,7 +47,7 @@ TOTAL                          142      9    94%
  - For checking your code, you should create separate class, which contains main method
 
 ### To run:
-  - Clone/Download lab2 branch
+  - Clone/Download lab4 branch
   - Go into repo folder
   - Type `./main.py` or `python3 main.py`
 
