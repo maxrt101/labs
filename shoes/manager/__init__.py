@@ -1,4 +1,3 @@
 # package shoesmngr - Shoes Manager
 
-from .manager import ShoesManager 
-
+from .manager import ShoesManager
