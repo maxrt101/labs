@@ -26,4 +26,5 @@ main.py [-h] [-c] [-m METHOD] [-s START_TIME] [-e END_TIME] [-d] [--by-resource]
   - Clone/Download lab5 branch
   - Go into repo folder
   - Type `./main.py LOGFILE` or `python3 main.py LOGFILE` (replace LOGFILE with actual file name)
+  - To run as specified in task, type `./main.py LOGFILE -m POST` (other parameters' default values are as in task)
 
