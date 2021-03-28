@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-import parser
+import log_parser
 import argparse
 
 from datetime import datetime
@@ -15,13 +15,13 @@ class Cli:
     def __init__(self, args):
         self.args = args
         self.args.file = self.args.file[0]
-        self.parser = parser.LogParser() 
+        self.parser = log_parser.LogParser() 
         self.count = {}
-        self.start_time = datetime.strptime(self.args.start_time, parser.LogEntry.time_format)
-        self.end_time   = datetime.strptime(self.args.end_time,   parser.LogEntry.time_format)
+        self.start_time = datetime.strptime(self.args.start_time, log_parser.LogEntry.time_format)
+        self.end_time   = datetime.strptime(self.args.end_time,   log_parser.LogEntry.time_format)
         if self.args.by_domain and self.args.by_resource:
-           parser.error(f'Can have only one --by-X argument at a time.')
-           exit()
+            log_parser.error(f'Can have only one --by-X argument at a time.')
+            exit()
 
     def run(self): 
         if self.args.count:
@@ -51,7 +51,6 @@ class Cli:
                             f'{matched} lines mathched {found} lines counted')
 
     def _parse(self):
-        p = parser.LogParser()
         lineno, matched = 0, 0
         for lineno, entry in self.parser.parse(self.args.file):
             matched += 1
@@ -59,13 +58,13 @@ class Cli:
         self._print_summary(f'File "{self.args.file}" summanry: {lineno} lines parsed {matched} lines mathched')
 
     def _print_summary(self, summary):
-        print(f'{parser.BLUE}{summary}{parser.RESET}')
+        print(f'{log_parser.BLUE}{summary}{log_parser.RESET}')
 
     def _display(self, lineno, line, override=False):
         if (self.args.first and lineno < self.args.first) or self.args.display or override:
             print(line)
 
-    def _get_key(self, entry: parser.LogEntry) -> str:
+    def _get_key(self, entry: log_parser.LogEntry) -> str:
         if self.args.by_resource:
             return entry.request.url
         if self.args.by_domain:
