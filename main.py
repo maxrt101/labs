@@ -33,7 +33,7 @@ class Cli:
         lineno, matched, found = 0, 0, 0
         for lineno, entry in self.parser.parse(self.args.file): 
             matched += 1
-            if (entry.request.method != self.args.method or entry.response_code != self.args.status or
+            if (entry.response_code != self.args.status or entry.request.method != self.args.method or 
                 entry.timestamp <= self.start_time or entry.timestamp >= self.end_time):
                 continue
             found += 1
@@ -56,7 +56,7 @@ class Cli:
         for lineno, entry in self.parser.parse(self.args.file):
             matched += 1
             self._display(lineno, entry)
-        self._print_summary(f'File "{self.args.file}" summanry: {lineno+1} lines parsed {matched} lines mathched')
+        self._print_summary(f'File "{self.args.file}" summanry: {lineno} lines parsed {matched} lines mathched')
 
     def _print_summary(self, summary):
         print(f'{parser.BLUE}{summary}{parser.RESET}')
