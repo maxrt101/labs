@@ -17,8 +17,6 @@ class Cli:
         self.args.file = self.args.file[0]
         self.parser = log_parser.LogParser() 
         self.count = {}
-        self.start_time = datetime.strptime(self.args.start_time, log_parser.LogEntry.time_format)
-        self.end_time   = datetime.strptime(self.args.end_time,   log_parser.LogEntry.time_format)
         if self.args.by_domain and self.args.by_resource:
             log_parser.error(f'Can have only one --by-X argument at a time.')
             exit()
@@ -29,14 +27,21 @@ class Cli:
         else:
             self._parse()
 
-    def _count(self):
-        lineno, matched, found = 0, 0, 0
-        for lineno, entry in self.parser.parse(self.args.file): 
+    def _parse(self):
+        lineno, matched =  0, 0
+        for lineno, entry in self.parser.find(self.args.file, self.args.method, self.args.status,
+                                              self.args.begin_time, self.args.end_time ): 
             matched += 1
-            if (entry.response_code != self.args.status or entry.request.method != self.args.method or 
-                entry.timestamp <= self.start_time or entry.timestamp >= self.end_time):
-                continue
-            found += 1
+            self._display(lineno, entry)
+
+        self._print_summary(f'File "{self.args.file}" summanry: {lineno} lines parsed '
+                            f'{matched} lines mathched')
+
+    def _count(self):
+        lineno, matched= 0, 0
+        for lineno, entry in self.parser.find(self.args.file, self.args.method, self.args.status,
+                                              self.args.begin_time, self.args.end_time ): 
+            matched += 1
             key = self._get_key(entry)
             self.count[key] = self.count[key]+1 if key in self.count else 1
         
@@ -47,15 +52,8 @@ class Cli:
                 self._display(i, '{}: {}'.format(tup[0], tup[1]))
         else:
             print('No records found for chosen criteria.')
-        self._print_summary(f'File "{self.args.file}" summanry: {lineno+1} lines parsed '
-                            f'{matched} lines mathched {found} lines counted')
-
-    def _parse(self):
-        lineno, matched = 0, 0
-        for lineno, entry in self.parser.parse(self.args.file):
-            matched += 1
-            self._display(lineno, entry)
-        self._print_summary(f'File "{self.args.file}" summanry: {lineno} lines parsed {matched} lines mathched')
+        self._print_summary(f'File "{self.args.file}" summanry: {lineno} lines parsed '
+                            f'{matched} lines mathched')
 
     def _print_summary(self, summary):
         print(f'{log_parser.BLUE}{summary}{log_parser.RESET}')
@@ -79,13 +77,13 @@ if __name__ == '__main__':
     ap.add_argument('file', metavar='FILE', nargs=1, help='Log file to parse')
     ap.add_argument('-c', '--count', dest='count', action='store_true', help='Start in count mode.')
     ap.add_argument('-m', '--method', dest='method', default='GET', help='HTTP Method to count on')
-    ap.add_argument('-s', '--start', dest='start_time', default=START_TIME, help='Start time')
-    ap.add_argument('-e', '--end', dest='end_time', default=END_TIME, help='End time')
+    ap.add_argument('-b', '--begin', dest='begin_time', help='Begin time')
+    ap.add_argument('-e', '--end', dest='end_time', help='End time')
     ap.add_argument('-d', '--display', dest='display', action='store_true', help='Display every log line (default false)')
+    ap.add_argument('-s', '--status', dest='status', default=200, type=int, help='HTTP response status code')
     ap.add_argument('--by-resource', dest='by_resource', action='store_true', help='Count by resource url (default: by url).')
     ap.add_argument('--by-domain', dest='by_domain', action='store_true', help='Count by domain names (default: by url).')
     ap.add_argument('--first', dest='first', type=int, help='Display first N lines')
-    ap.add_argument('--status', dest='status', default=200, type=int, help='HTTP response status code')
     ap.add_argument('--sort-reverse', dest='reverse', action='store_true', help='Sort count table desc (default asc)')
 
     cli = Cli(ap.parse_args())
