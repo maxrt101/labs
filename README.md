@@ -12,11 +12,11 @@ main.py [-h] [-c] [-m METHOD] [-s STATUS] [-b BEGIN_TIME] [-e END_TIME]
  - `FILE` - File to parse (required)
  - `-h`, `--help` - Print help message
  - `-c`, `--count` - Start in count mode, by default the script will just parse the file and print summary
+ - `-d`, `--display` - Flag to print all parsed lines in parse mode
  - `-m METHOD`, `--method METHOD` - HTTP request method
  - `-s STATUS`, `--status STATUS` - Filter by HTTP response status code
  - `-b START_TIME`, `--begin START_TIME` - Specify begin time for log entries, entries before that time, will not be counted
  - `-e END_TIME`, `--end END_TIME` - Similar as above, but sets the upper bound
- - `-d`, `--display` - Flag to print all parsed lines in parse mode
  - `--first FIRST` - Print only first FIRST number of lines in output
  - `--sort-reverse` - Reverse count table
 

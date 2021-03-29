@@ -61,11 +61,11 @@ if __name__ == '__main__':
                     'By default just parses the file and prints summary.')
     ap.add_argument('file', metavar='FILE', nargs=1, help='Log file to parse')
     ap.add_argument('-c', '--count', dest='count', action='store_true', help='Start in count mode')
+    ap.add_argument('-d', '--display', dest='display', action='store_true', help='Display every log line (Default off)')
     ap.add_argument('-m', '--method', dest='method', default='.+', help='HTTP Method (Default ".+")')
     ap.add_argument('-s', '--status', dest='status', default='\d{3}', help='HTTP Status code (Default "\d{3}")')
     ap.add_argument('-b', '--begin', dest='begin_time', help='Lower time bound')
     ap.add_argument('-e', '--end', dest='end_time', help='Upper time bound')
-    ap.add_argument('-d', '--display', dest='display', action='store_true', help='Display every log line (Default off)')
     ap.add_argument('--first', dest='first', type=int, help='Display first N lines')
     ap.add_argument('--sort-reverse', dest='reverse', action='store_true', help='Sort count table DESC instead of default ASC')
 
