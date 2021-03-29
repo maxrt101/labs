@@ -6,8 +6,8 @@ Count and print top-5 successful POST requests in span from 02:35 to 03:18 01/Ju
 
 ### Usage
 ```
-main.py [-h] [-c] [-m METHOD] [-s START_TIME] [-e END_TIME] [-d] [--by-resource]
-        [--by-domain] [--first FIRST] [--status STATUS] [--sort-reverse] FILE
+main.py [-h] [-c] [-m METHOD] [-s STATUS] [-b BEGIN_TIME] [-e END_TIME]
+        [-d] [--first FIRST] [--sort-reverse] FILE
 ```
  - `FILE` - File to parse (required)
  - `-h`, `--help` - Print help message
