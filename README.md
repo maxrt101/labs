@@ -18,8 +18,6 @@ main.py [-h] [-c] [-m METHOD] [-s START_TIME] [-e END_TIME] [-d] [--by-resource]
  - `-e END_TIME`, `--end END_TIME` - Similar as above, but sets the upper bound
  - `-d`, `--display` - Flag to print all parsed lines in parse mode
  - `--first FIRST` - Print only first FIRST number of lines in output
- - `--by-resource` - Count using web page address, exluding domain (default is full url)
- - `--by-domain` - Count using only domain, excluding resource (default is full url)
  - `--sort-reverse` - Reverse count table
 
 ### To run:

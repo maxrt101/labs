@@ -10,12 +10,6 @@ class Cli:
         self.args.file = self.args.file[0]
         self.parser = log_parser.LogParser() 
         self.count = {}
-        if self.args.by_domain and self.args.by_resource:
-            log_parser.error(f'Can have only one --by-X argument at a time.')
-            exit()
-        if not self.args.count and (self.args.by_domain or self.args.by_resource):
-            log_parser.error(f'--by-X arguments are useless in parse mode (use -c)')
-            exit()
 
     def run(self): 
         if self.args.count:
@@ -38,7 +32,7 @@ class Cli:
         for lineno, entry in self.parser.find(self.args.file, self.args.method, self.args.status, \
                                               self.args.begin_time, self.args.end_time ): 
             matched += 1
-            key = self._get_key(entry)
+            key = entry.request.url
             self.count[key] = self.count[key]+1 if key in self.count else 1
         
         self.count = sorted(self.count.items(), key=lambda i: i[1], reverse=not self.args.reverse)
@@ -58,13 +52,6 @@ class Cli:
         if (self.args.first and lineno < self.args.first) or self.args.display or override:
             print(line)
 
-    def _get_key(self, entry: log_parser.LogEntry) -> str:
-        if self.args.by_resource:
-            return entry.request.url
-        if self.args.by_domain:
-            return entry.uri
-        return entry.uri + entry.request.url
-
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(
@@ -80,8 +67,6 @@ if __name__ == '__main__':
     ap.add_argument('-e', '--end', dest='end_time', help='Upper time bound')
     ap.add_argument('-d', '--display', dest='display', action='store_true', help='Display every log line (Default off)')
     ap.add_argument('--first', dest='first', type=int, help='Display first N lines')
-    ap.add_argument('--by-resource', dest='by_resource', action='store_true', help='Count by resource url (Default: by url).')
-    ap.add_argument('--by-domain', dest='by_domain', action='store_true', help='Count by domain names (Default: by url).')
     ap.add_argument('--sort-reverse', dest='reverse', action='store_true', help='Sort count table DESC instead of default ASC')
 
     cli = Cli(ap.parse_args())

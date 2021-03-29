@@ -82,9 +82,9 @@ class Timestamp:
 class LogEntry:
     regex =  r'(.+?) (.+?) (.+?) \[([^\]]+)\] "(.+?)" (\d{3}) (.+)'
 
-    def __init__(self, uri: str, client_identity: str,  userid: str, timestamp: str,
+    def __init__(self, client_addr: str, client_identity: str,  userid: str, timestamp: str,
                  request_header: str, response_code: str, payload_size: str):
-        self.uri = uri
+        self.client_addr = client_addr
         self.client_identity = client_identity
         self.userid = userid
         self.timestamp = timestamp
@@ -94,7 +94,7 @@ class LogEntry:
 
     def __str__(self) -> str:
         return '{} {} {} [{}] "{}" {} {}'.format(
-            self.uri, self.client_identity, self.userid, self.timestamp,
+            self.client_addr, self.client_identity, self.userid, self.timestamp,
             self.request, self.response_code, self.payload_size)
 
 
