@@ -35,7 +35,7 @@ class Cli:
             key = entry.request.url
             self.count[key] = self.count[key]+1 if key in self.count else 1
         
-        self.count = sorted(self.count.items(), key=lambda i: i[1], reverse=not self.args.reverse)
+        self.count = sorted(self.count.items(), key=lambda x: x[1], reverse=not self.args.reverse)
         
         if self.count:
             for i, tup in enumerate(self.count):

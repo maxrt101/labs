@@ -2,10 +2,10 @@
 Libary for parsing NCSA Common access log format
 
 The format is as follows:
-  IP/URI CLIENT_IDENTITY USERID [DATETIME] REQUEST_HEADER STATUS_CODE PAYLOAD_SIZE
+  CLIENT_ADDR CLIENT_IDENTITY USERID [DATETIME] REQUEST_HEADER STATUS_CODE PAYLOAD_SIZE
 
 Regex pattern used to parse the entries:
-  (.+) (.+) (.+) \[([^\]]+)\] "(.+)" (\d{3}) (.+)
+  (.+?) (.+?) (.+?) \[([^\]]+)\] "(.+?)" (\d{3}) (.+)
 
 Classes:
   RequestHeader
@@ -37,8 +37,8 @@ def error(*args):
 class RequestHeader:
     def __init__(self, request_header: str):
         request_header = request_header.split(' ')
-        self.method = request_header[0] if len(request_header) > 0 else ''
-        self.url = request_header[1] if len(request_header) > 1 else ''
+        self.method   = request_header[0] if len(request_header) > 0 else ''
+        self.url      = request_header[1] if len(request_header) > 1 else ''
         self.protocol = request_header[2] if len(request_header) > 2 else ''
 
     def __str__(self) -> str:
@@ -62,6 +62,7 @@ class Timestamp:
                 self.hr  = int(match.group(4))
                 self.min = int(match.group(5))
                 self.sec = int(match.group(6))
+                self.datetime = datetime(self.yr, Timestamp.mon_names[self.mon], self.day, self.hr, self.min, self.sec) 
                 self.valid = True
 
     def __str__(self) -> str:
@@ -71,12 +72,10 @@ class Timestamp:
         return self.valid
 
     def __gt__(self, rhs) -> bool:
-        return datetime(self.yr, Timestamp.mon_names[self.mon], self.day, self.hr, self.min, self.sec) > \
-               datetime(rhs.yr, Timestamp.mon_names[rhs.mon], rhs.day, rhs.hr, rhs.min, rhs.sec)
+        return self.datetime > rhs.datetime
 
     def __lt__(self, rhs) -> bool:
-        return datetime(self.yr, Timestamp.mon_names[self.mon], self.day, self.hr, self.min, self.sec) < \
-               datetime(rhs.yr, Timestamp.mon_names[rhs.mon], rhs.day, rhs.hr, rhs.min, rhs.sec)
+        return self.datetime < rhs.datetime
 
 
 class LogEntry:
@@ -122,12 +121,9 @@ class LogParser:
                     if not date: continue
                     ts = Timestamp(date.group(1))
                     if begin_ts and ts < begin_ts: continue
-                    if end_ts   and ts > end_ts: print('end ts')
                     if end_ts   and ts > end_ts: return
-                status_match = status_pattern.search(line)
-                if not status_match: continue
-                method_match = method_pattern.search(line)
-                if not method_match: continue
+                if not status_pattern.search(line): continue
+                if not method_pattern.search(line): continue
                 result = self.pattern.search(line)
                 if result:
                     yield lineno, LogEntry(result.group(1), result.group(2), result.group(3),
