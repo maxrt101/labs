@@ -18,12 +18,16 @@ Functions:
 """
 
 import re
+import calendar
+from datetime import datetime
 from typing import List, Dict, Tuple, Generator, Final
 
-GREEN: Final[str] = '\u001b[32m'
-BLUE:  Final[str] = '\u001b[34m'
-RED:   Final[str] = '\u001b[31m'
-RESET: Final[str] = '\u001b[0m'
+
+GREEN: Final[str] = '\x1b[32m'
+BLUE:  Final[str] = '\x1b[34m'
+BBLUE: Final[str] = '\x1b[94m'
+RED:   Final[str] = '\x1b[31m'
+RESET: Final[str] = '\x1b[0m'
 
 
 def error(*args):
@@ -42,39 +46,42 @@ class RequestHeader:
 
 
 class Timestamp:
-    regex = r'(\d{2})\/(\w{3})\/(\d{4}):(\d{2}):(\d{2}):(\d{2})' # (-\d{4})' # utc offset
+    regex = r'(\d{2})\/(\w{3})\/(\d{4}):(\d{2}):(\d{2}):(\d{2})' # (-\d{4}) # utc offset
     pattern = re.compile(regex)
+
+    mon_names = {month: index for index, month in enumerate(calendar.month_abbr) if month}
 
     def __init__(self, string: str):
         self.valid = False
         if string:
             match = Timestamp.pattern.search(string)
             if match:
-                self.day = match.group(1)
+                self.day = int(match.group(1))
                 self.mon = match.group(2)
-                self.yr  = match.group(3)
-                self.hr  = match.group(4)
-                self.min = match.group(5)
-                self.sec = match.group(6)
+                self.yr  = int(match.group(3))
+                self.hr  = int(match.group(4))
+                self.min = int(match.group(5))
+                self.sec = int(match.group(6))
                 self.valid = True
 
     def __str__(self) -> str:
-        return f'{self.day}/{self.mon}/{self.yr}:{self.hr}:{self.min} {self.sec}' if self.valid else ''
+        return f'{self.day}/{self.mon}/{self.yr}:{self.hr}:{self.min}:{self.sec}' if self.valid else ''
 
     def __bool__(self) -> bool:
         return self.valid
 
     def __gt__(self, rhs) -> bool:
-        return self.day > rhs.day and self.mon > rhs.mon and self.yr > rhs.yr and \
-               self.hr > rhs.hr and self.min > rhs.min and self.sec > rhs.sec
+        return datetime(self.yr, Timestamp.mon_names[self.mon], self.day, self.hr, self.min, self.sec) > \
+               datetime(rhs.yr, Timestamp.mon_names[rhs.mon], rhs.day, rhs.hr, rhs.min, rhs.sec)
 
     def __lt__(self, rhs) -> bool:
-        return self.day < rhs.day and self.mon < rhs.mon and self.yr < rhs.yr and \
-               self.hr < rhs.hr and self.min < rhs.min and self.sec < rhs.sec
+        return datetime(self.yr, Timestamp.mon_names[self.mon], self.day, self.hr, self.min, self.sec) < \
+               datetime(rhs.yr, Timestamp.mon_names[rhs.mon], rhs.day, rhs.hr, rhs.min, rhs.sec)
 
 
 class LogEntry:
     regex =  r'(.+?) (.+?) (.+?) \[([^\]]+)\] "(.+?)" (\d{3}) (.+)'
+
     def __init__(self, uri: str, client_identity: str,  userid: str, timestamp: str,
                  request_header: str, response_code: str, payload_size: str):
         self.uri = uri
@@ -88,20 +95,19 @@ class LogEntry:
     def __str__(self) -> str:
         return '{} {} {} [{}] "{}" {} {}'.format(
             self.uri, self.client_identity, self.userid, self.timestamp,
-            self.request, self.response_code, self.payload_size
-        )
+            self.request, self.response_code, self.payload_size)
 
 
 class LogParser:
     def __init__(self):
         self.pattern = re.compile(LogEntry.regex)
 
-    def find(self, filename: str, method: str, status: int, begin_time: str = None, end_time: str = None) -> \
+    def find(self, filename: str, method: str, status: str, begin_time: str = None, end_time: str = None) -> \
             Generator[Tuple[int, LogEntry], None, None]:
         ''' Yields line number and parsed log entry for that line '''
 
-        method_pattern = re.compile(rf'"{method} ')
-        status_pattern = re.compile(rf' {status} ')
+        method_pattern = re.compile(f'"{method} ')
+        status_pattern = re.compile(f' {status} ')
         date_pattern   = re.compile(r' \[([^\]]+)\] ')
 
         begin_ts = Timestamp(begin_time)
@@ -111,12 +117,12 @@ class LogParser:
             lineno = 0
             for line in f:
                 lineno += 1
-                ts = None
                 if begin_ts or end_ts:
                     date = date_pattern.search(line)
                     if not date: continue
                     ts = Timestamp(date.group(1))
                     if begin_ts and ts < begin_ts: continue
+                    if end_ts   and ts > end_ts: print('end ts')
                     if end_ts   and ts > end_ts: return
                 status_match = status_pattern.search(line)
                 if not status_match: continue
