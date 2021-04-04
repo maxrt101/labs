@@ -1,7 +1,7 @@
 '''
 config.py - parse simple config files
 Format: KEY=VALUE
-Commenting is supported through prepending '#' at the line beginning
+Commenting is supported through prepending the line with '#'
 Important: spaces are NOT ignored, so if the row looks like 'key = value ',
            KEY will be 'key ' and VALUE - ' value '.
 
