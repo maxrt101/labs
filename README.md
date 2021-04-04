@@ -17,12 +17,12 @@
  - `--debug` - Flask debug mode
 
 ### Config file
-Configuration info is stored in config file. Default config file is `server.cfg`.
-The syntax for property is `KEY=VALUE`.
-You can override the config with `-c` flag.
-`--host` and `--port` flags override config props.
-Important notice: config parser DOESN'T ignore spaces. Every space will be considered as a part of key or value.
-Config should contain such properties:
+Configuration info is stored in config file. Default config file is `server.cfg`.  
+The syntax for property is `KEY=VALUE`.  
+You can override the config file with `-c` flag.  
+`--host` and `--port` flags override `HOST` and `PORT` config props.  
+Important notice: config parser DOESN'T ignore spaces. Every space will be considered as a part of key or value.  
+Config should contain such properties:  
  - `USER` - MySQL user name
  - `PASS` - MySQL user password
  - `DB_SERVER` - MySQL server name
