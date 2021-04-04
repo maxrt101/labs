@@ -38,4 +38,5 @@ Config should contain such properties:
   - Install dependencies using `pip3 install -r requirements.txt`
   - Change `USER`, `PASS` and `DB_NAME` to appropriate for your DB values.
   - Run the app using `./main.py` or `python3 main.py`
+  - To run tests, first start `main.py`, then run `python -m unittest`
 
