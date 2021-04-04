@@ -18,7 +18,7 @@
 
 ### Config file
 Configuration info is stored in config file. Default config file is `server.cfg`.  
-The syntax for property is `KEY=VALUE`.  
+The syntax for property is `KEY=VALUE`. The line is considered a comment, if it starts with `#`.   
 You can override the config file with `-c` flag.  
 `--host` and `--port` flags override `HOST` and `PORT` config props.  
 Important notice: config parser DOESN'T ignore spaces. Every space will be considered as a part of key or value.  
