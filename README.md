@@ -36,5 +36,6 @@ Config should contain such properties:
   - Create virtual env using `python3 -m venv .venv` command
   - Activate venv using `source .venv/bin/activate` on \*nix systems and `.venv\Scripts\activate.bat` on Windows cmd.
   - Install dependencies using `pip3 install -r requirements.txt`
+  - Change `USER`, `PASS` and `DB_NAME` to appropriate for your DB values.
   - Run the app using `./main.py` or `python3 main.py`
 
