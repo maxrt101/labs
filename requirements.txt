@@ -3,3 +3,4 @@ flask_sqlalchemy
 flask_marshmallow
 marshmallow-sqlalchemy
 mysql-connector
+requests
