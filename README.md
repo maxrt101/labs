@@ -11,7 +11,7 @@
  main.py [-h] [-c CONFIGFILE] [--host HOST] [--port PORT] [--debug]
 ```
  - `-h`, `--help` - Show help message and exit
- - `-c CONFIGFILE`, `--config CONFIGFILE` - Config file path, default server.cfg
+ - `-c CONFIGFILE`, `--config CONFIGFILE` - Config file path, default `server.cfg`
  - `--host HOST` - Server host address
  - `--port PORT` - Server port
  - `--debug` - Flask debug mode
@@ -31,7 +31,7 @@ Config should contain such properties:
  - `PORT` - Flask server port
 
 ### To run:
-  - Clone/Download lab5 branch
+  - Clone/Download lab6 branch
   - Go into repo folder
   - Create virtual env using `python3 -m venv .venv` command
   - Activate venv using `source .venv/bin/activate` on \*nix systems and `.venv\Scripts\activate.bat` on Windows cmd.
