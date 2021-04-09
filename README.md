@@ -1,2 +1,2 @@
-# python_labs
-IoT python labs
+# IoT labs
+
