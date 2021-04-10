@@ -1,3 +1,4 @@
+// Farm.java by maxrt101
 
 import java.util.List;
 import java.util.Arrays;
@@ -8,17 +9,17 @@ import java.util.HashMap;
 class Farm {
   private static int farmsCreated = 0;
 
-  private String location = "";
+  private String location = "-";
   private int animalCount = 0;
   private int ventsPowerWatts = 0;
   
   private int area = 0;
   private int monthlyIncome = 0;
   private int workersAmmount = 0;
-  private String ownerName = "";
+  private String ownerName = "-";
   private List<String> animalSpecies;
   
-  protected String farmName = "";
+  protected String farmName = "-";
   protected Map<String, Integer> productPrices;
 
 
@@ -117,18 +118,20 @@ class Farm {
     this.productPrices = productPrices;
   }
 
+  @Override
   public String toString() {
-    return "Area: " + this.area + "\nMonthly Income: " + this.monthlyIncome + "\nWorkers Ammunt: " + this.workersAmmount +
-           "\nLocation: " + this.location + "\nAnimal Count: " + this.animalCount + "\nVents Power: " + this.ventsPowerWatts +
-           "\nOwner Name: " + this.ownerName + "\nAnimal Species: " + this.animalSpecies + "\nFarm Name: " + this.farmName +
-           "\nProduct Prices: " + this.productPrices + "\n";
+    return String.format("Area: %d\nMonthly Income: %d\nWorkers Ammount: %d\nLocation: %s\nAnimal Count: %d\n" +
+            "Vents Power: %d\nOwner Name: %s\nAnimal Species: %s\nFarm Name: %s\nProductPrices: %s\n",
+            this.area, this.monthlyIncome, this.workersAmmount, this.location, this.animalCount, this.ventsPowerWatts,
+            this.ownerName, this.animalSpecies, this.farmName, this.productPrices);
   }
 
 
   public static void main(String[] args) {
     Farm farm1 = new Farm();
     Farm farm2 = new Farm(6400, 150000, 120, "Ivan");
-    Farm farm3 = new Farm("Lviv", 150, 2000, 5500, 125000, 80, "Pavlo", Arrays.asList("Pigs", "Sheeps", "Cows"), "Vesela Ferma", Map.of("Eggs", 5, "Milk", 30, "Wool", 120));
+    Farm farm3 = new Farm("Lviv", 150, 2000, 5500, 125000, 80, "Pavlo",
+        Arrays.asList("Pigs", "Sheeps", "Cows"), "Vesela Ferma", Map.of("Eggs", 5, "Milk", 30, "Wool", 120));
 
     System.out.println("Farm #1:\n" + farm1.toString());
     System.out.println("Farm #2:\n" + farm2.toString());

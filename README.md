@@ -11,6 +11,7 @@ Create console application in java programming language. Implement class from 1s
  - Add default constructor, constructor that takes 4 parameters (first 4 of additional protected fields) and a constructor that initializes all fileds
  - Methods: toString(), static method printStaticField(where field is the name of static field), resetValues() - changes all fileds to the passed values
  - The code should be in a repository, which contains readme and gitignore files
+ - In main() method create 3 objects of task's class, using various constructors, print objects using toString(). Also print static field using printStaticField();
 
 ### To run:
   - Clone/Download lab7 branch
