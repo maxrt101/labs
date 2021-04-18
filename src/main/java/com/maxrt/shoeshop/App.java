@@ -8,21 +8,21 @@ import com.maxrt.shoeshop.shoes.Sneakers;
 import com.maxrt.shoeshop.shoes.Boots;
 import com.maxrt.shoeshop.shoes.FlipFlops;
 
-
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class App {
     public static void main(final String[] args) {
         ShoesManager manager = new ShoesManager();
-        manager.addShoes(new ArrayList<Shoes>() {{
-            add(new Sneakers(10, "Adidas"));
-            add(new FlipFlops(20, "Adidas"));
-            add(new Sneakers(20, "Nike"));
-            add(new Boots(10, "Adidas"));
-            add(new Sneakers(30, "Nike"));
-            add(new FlipFlops(17, "Nike"));
-            add(new Boots(14, "Adidas"));
-        }});
+        manager.addShoes(Arrays.asList(
+            new Sneakers(10, "Adidas"),
+            new FlipFlops(20, "Adidas"),
+            new Sneakers(20, "Nike"),
+            new Boots(10, "Adidas"),
+            new Sneakers(30, "Nike"),
+            new FlipFlops(17, "Nike"),
+            new Boots(14, "Adidas")
+        ));
 
         System.out.print("Unsorted: ");
         manager.getShoes().forEach(s -> System.out.print(" " + s));
