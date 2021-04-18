@@ -12,8 +12,8 @@
  - You must use an Enum
  - Code must be in a separate branch with PR
  - Comparison must be implemented using lambdas
- - Instead of getters/setters you should use @Data annotation from lombok
- - Use maven and Jococo(in build), FindBugs, PMD, CheckStyle plugins
+ - Instead of getters/setters you should use `@Data` annotation from lombok
+ - Use maven and Jococo(in build section), FindBugs, PMD, CheckStyle plugins
  - Run `mvn site` and fix errors reported by checkstyle, pmd and findbugs
 
 ### To run:
