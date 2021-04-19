@@ -12,20 +12,22 @@ public class ShoesManager {
     @Getter
     private final List<Shoes> shoes = new ArrayList<>();
 
-    public void addShoe(Shoes shoe) {
+
+    public void addShoe(final Shoes shoe) {
         shoes.add(shoe);
     }
 
-    public void addShoes(final List<Shoes> shoes) {
-        this.shoes.addAll(shoes);
+    public void addShoes(final List<Shoes> shoesList) {
+        this.shoes.addAll(shoesList);
     }
 
     public List<Shoes> sortBySize(final SortOrder order) {
         return sortBySize(order, shoes);
     }
 
-    public List<Shoes> sortBySize(final SortOrder order, final List<Shoes> shoes) {
-        List<Shoes> sorted = new ArrayList<>(shoes);
+    public List<Shoes> sortBySize(final SortOrder order,
+                                  final List<Shoes> shoesList) {
+        List<Shoes> sorted = new ArrayList<>(shoesList);
         if (order == SortOrder.ASC) {
             sorted.sort((shoe1, shoe2) -> shoe1.getSize() - shoe2.getSize());
         } else {
@@ -38,12 +40,15 @@ public class ShoesManager {
         return sortByType(order, shoes);
     }
 
-    public List<Shoes> sortByType(final SortOrder order, final List<Shoes> shoes) {
-        List<Shoes> sorted = new ArrayList<>(shoes);
+    public List<Shoes> sortByType(final SortOrder order,
+                                  final List<Shoes> shoesList) {
+        List<Shoes> sorted = new ArrayList<>(shoesList);
         if (order == SortOrder.ASC) {
-            sorted.sort((shoe1, shoe2) -> shoe1.getType().compareTo(shoe2.getType()));
+            sorted.sort((shoe1, shoe2) ->
+                    shoe1.getType().compareTo(shoe2.getType()));
         } else {
-            sorted.sort((shoe1, shoe2) -> shoe2.getType().compareTo(shoe1.getType()));
+            sorted.sort((shoe1, shoe2) ->
+                    shoe2.getType().compareTo(shoe1.getType()));
         }
         return sorted;
     }
@@ -52,12 +57,15 @@ public class ShoesManager {
         return sortByManufacturer(order, shoes);
     }
 
-    public List<Shoes> sortByManufacturer(final SortOrder order, final List<Shoes> shoes) {
-        List<Shoes> sorted = new ArrayList<>(shoes);
+    public List<Shoes> sortByManufacturer(final SortOrder order,
+                                          final List<Shoes> shoesList) {
+        List<Shoes> sorted = new ArrayList<>(shoesList);
         if (order == SortOrder.ASC) {
-            sorted.sort((shoe1, shoe2) -> shoe1.getManufacturer().compareTo(shoe2.getManufacturer()));
+            sorted.sort((shoe1, shoe2) ->
+                    shoe1.getManufacturer().compareTo(shoe2.getManufacturer()));
         } else {
-            sorted.sort((shoe1, shoe2) -> shoe2.getManufacturer().compareTo(shoe1.getManufacturer()));
+            sorted.sort((shoe1, shoe2) ->
+                    shoe2.getManufacturer().compareTo(shoe1.getManufacturer()));
         }
         return sorted;
     }
@@ -66,8 +74,9 @@ public class ShoesManager {
         return findByType(type, shoes);
     }
 
-    public List<Shoes> findByType(final ShoeType type, final List<Shoes> shoes) {
-        return shoes.stream()
+    public List<Shoes> findByType(final ShoeType type,
+                                  final List<Shoes> shoesList) {
+        return shoesList.stream()
                 .filter(shoe -> shoe.getType() == type)
                 .collect(Collectors.toList());
     }
@@ -76,8 +85,8 @@ public class ShoesManager {
         return findBySize(size, shoes);
     }
 
-    public List<Shoes> findBySize(final int size, List<Shoes> shoes) {
-        return shoes.stream()
+    public List<Shoes> findBySize(final int size, final List<Shoes> shoesList) {
+        return shoesList.stream()
                 .filter(shoe -> shoe.getSize() == size)
                 .collect(Collectors.toList());
     }

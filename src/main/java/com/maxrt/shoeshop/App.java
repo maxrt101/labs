@@ -6,9 +6,12 @@ import com.maxrt.shoeshop.shoes.ShoeType;
 import com.maxrt.shoeshop.shoes.Sneakers;
 import com.maxrt.shoeshop.shoes.Boots;
 import com.maxrt.shoeshop.shoes.FlipFlops;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class App {
     public static void main(final String[] args) {
         ShoesManager manager = new ShoesManager();

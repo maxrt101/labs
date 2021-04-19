@@ -10,8 +10,10 @@ import lombok.ToString;
 public class Boots extends Shoes {
     private boolean hasShoelaces;
 
-    public Boots(final int size, final String manufacturer, final boolean hasShoelaces) {
+    public Boots(final int size,
+                 final String manufacturer,
+                 final boolean shoelaces) {
         super(ShoeType.WINTER, size, manufacturer);
-        this.hasShoelaces = hasShoelaces;
+        this.hasShoelaces = shoelaces;
     }
 }

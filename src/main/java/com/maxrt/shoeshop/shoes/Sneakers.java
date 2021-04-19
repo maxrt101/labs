@@ -10,8 +10,10 @@ import lombok.ToString;
 public class Sneakers extends Shoes {
     private int amortizationIndex;
 
-    public Sneakers(final int size, final String manufacturer, int amortizationIndex) {
+    public Sneakers(final int size,
+                    final String manufacturer,
+                    final int amortization) {
         super(ShoeType.SPORT, size, manufacturer);
-        this.amortizationIndex = amortizationIndex;
+        this.amortizationIndex = amortization;
     }
 }
