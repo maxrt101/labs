@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @Path("/shoes")
-public final class ShoesController {
+public final class ShoesResource {
     private static final HashMap<Integer, Shoes> SHOES = new HashMap<>();
     private static int nextId;
 

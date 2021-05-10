@@ -11,6 +11,6 @@ import javax.ws.rs.ApplicationPath;
 public final class JerseyConfig extends ResourceConfig {
     @PostConstruct
     public void init() {
-        registerClasses(ShoesController.class);
+        registerClasses(ShoesResource.class);
     }
 }
