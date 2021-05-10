@@ -16,4 +16,5 @@ The task is to create REST service using java language and JAX-RS library.
  - Clone/download lab8 branch
  - `cd` into repo folder
  - Run `mvn install`
- - Run `java -jar target/lab9-VERSION.jar`
+ - Run `java -jar target/lab9-VERSION.jar`, where `VERSION` is version of the app  
+   (can be found in `pom.xml`, under `<version>` tag)
