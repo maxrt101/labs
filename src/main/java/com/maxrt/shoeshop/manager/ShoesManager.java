@@ -8,7 +8,7 @@ import com.maxrt.shoeshop.shoes.ShoeType;
 import com.maxrt.shoeshop.shoes.Shoes;
 import lombok.Getter;
 
-public class ShoesManager {
+public final class ShoesManager {
     @Getter
     private final List<Shoes> shoes = new ArrayList<>();
 

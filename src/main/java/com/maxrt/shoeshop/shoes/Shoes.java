@@ -1,15 +1,23 @@
 package com.maxrt.shoeshop.shoes;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Shoes {
-    protected ShoeType type;
-    protected int size;
-    protected String manufacturer;
+    private static int nextId;
+
+    private int id;
+    private ShoeType type;
+    private int size;
+    private String manufacturer;
+
+    Shoes(final ShoeType shoeType,
+          final int shoeSize,
+          final String shoeManufacturer) {
+        type = shoeType;
+        size = shoeSize;
+        manufacturer = shoeManufacturer;
+    }
 }
