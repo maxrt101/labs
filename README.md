@@ -13,7 +13,7 @@ The task is to create REST service using java language and JAX-RS library.
  - Objects should be stored in a `Map`
 
 ### To run:
- - Clone/download lab8 branch
+ - Clone/download lab9 branch
  - `cd` into repo folder
  - Run `mvn install`
  - Run `java -jar target/lab9-VERSION.jar`, where `VERSION` is version of the app  
